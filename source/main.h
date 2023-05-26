@@ -2,7 +2,19 @@
 // Created by ilaria on 2023-05-26.
 //
 
-#ifndef MIRIAM_PROJECT_MAIN_H
-#define MIRIAM_PROJECT_MAIN_H
+#pragma once
 
-#endif //MIRIAM_PROJECT_MAIN_H
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <random>
+#include <cstdlib>
+#include <ctime>
+
+// Define simulation parameters
+const int N = 16;            // Number of spins in each dimension
+const int n_steps = 10000;   // Number of simulation steps
+const double T = 0.5;        // Temperature
+const double thetabox = M_PI / 4;
+
+
