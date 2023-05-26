@@ -54,7 +54,7 @@
       "name": "conan",
       "hidden": true,
       "cacheVariables": {
-        "DMRG_PACKAGE_MANAGER": "find",
+        "GL_PACKAGE_MANAGER": "find",
         "CMAKE_PROJECT_TOP_LEVEL_INCLUDES": "${sourceDir}/cmake/conan/conan_provider.cmake",
         "CMAKE_FIND_PACKAGE_PREFER_CONFIG": "TRUE"
       },
