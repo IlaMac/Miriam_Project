@@ -60,7 +60,7 @@
       },
       "environment": {
         "PATH": "$env{HOME}/anaconda3/bin:$env{HOME}/miniconda3/bin:$penv{PATH}"
-      }da
+      }
     },
     {
       "name": "release",
