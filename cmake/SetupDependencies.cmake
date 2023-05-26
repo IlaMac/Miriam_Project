@@ -20,7 +20,6 @@ endif()
 
 # Setup dependencies
 include(cmake/SetupDependenciesCMake.cmake)
-include(cmake/SetupDependenciesConan.cmake)
 
 # Link dependencies
 if(NOT TARGET deps)
