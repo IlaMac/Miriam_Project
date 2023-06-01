@@ -3,6 +3,8 @@
 //
 
 #include "main.h"
+#include<ctime>
+#include<fstream>
 
 // Initialize random spin directions
 std::vector<std::vector<double>> spins(N, std::vector<double>(N));
@@ -60,7 +62,8 @@ double magnetization(const std::vector<std::vector<double>>& spins) {
 }
 
 int main(int argc, char *argv[]) {
-    srand(time(NULL));
+    //srand(time(NULL));
+    srand(static_cast<unsigned int>(time(NULL)));
 
     int L;
     L=std::atoi(argv[1]);
@@ -72,9 +75,19 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    //Create an output file in order to write the results
+    std::ofstream outputFile ("/home/miriam/KTH/Miriam_Project/Output/results.txt");
+
+    // Check if the file is opened successfully
+    if (!outputFile.is_open()) {
+        std::cerr << "Error opening the file." << std::endl;
+        return 1;
+    }
+
     // Run simulation
+    double thetabox = 0.0;
     std::vector<double> energies;
-    std::vector<double> magnetization;
+    std::vector<double> magnetization_values;
     double acc_ideal = 0.5;
     for (int step = 0; step < n_steps; step++) {
         int acc_rate = 0;
@@ -84,11 +97,19 @@ int main(int argc, char *argv[]) {
             acc_rate = result.second;
         }
         energies.push_back(energy(spins));
-        //magnetization.push_back(magnetization(spins));
-        //double acc = static_cast<double>(acc_rate) / (N * N);
-        //thetabox = thetabox * (0.5 + 0.5 * (acc / acc_ideal));
-        //std::cout << acc << " " << thetabox << std::endl;
+        magnetization_values.push_back(magnetization(spins));
+        double acc = static_cast<double>(acc_rate) / (N * N);
+        thetabox = thetabox * (0.5 + 0.5 * (acc / acc_ideal));
+        std::cout << acc << " " << thetabox << std::endl;
     }
+
+    //Write the results in the file we called before
+    for (int i = 0; i < energies.size(); ++i) {
+        outputFile << energies[i] << " " << magnetization_values[i] << std::endl;
+    }
+
+    //Close the file
+    outputFile.close();
 
     // No plot
 
