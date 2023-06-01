@@ -59,9 +59,12 @@ double magnetization(const std::vector<std::vector<double>>& spins) {
     return M_x * M_x + M_y * M_y;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     srand(time(NULL));
 
+    int L;
+    L=std::atoi(argv[1]);
+    std::cout<< L << std::endl;
     // Initialize random spin directions
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
@@ -81,10 +84,10 @@ int main() {
             acc_rate = result.second;
         }
         energies.push_back(energy(spins));
-        magnetization.push_back(magnetization(spins));
-        double acc = static_cast<double>(acc_rate) / (N * N);
-        thetabox = thetabox * (0.5 + 0.5 * (acc / acc_ideal));
-        std::cout << acc << " " << thetabox << std::endl;
+        //magnetization.push_back(magnetization(spins));
+        //double acc = static_cast<double>(acc_rate) / (N * N);
+        //thetabox = thetabox * (0.5 + 0.5 * (acc / acc_ideal));
+        //std::cout << acc << " " << thetabox << std::endl;
     }
 
     // No plot
