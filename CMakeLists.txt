@@ -59,7 +59,7 @@ include(cmake/CompilerFlags.cmake)
 ### Add all source files recursively
 file(GLOB_RECURSE SOURCES "source/*.cpp")
 file(GLOB_RECURSE HEADERS "source/*.h")
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} source/main.cpp source/main.h )
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} source/main.cpp source/main.h source/measures.cpp source/measures.h)
 
 ##################################################################
 ###  Force cmake to find .a library suffixes on static builds  ###

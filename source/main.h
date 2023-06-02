@@ -10,11 +10,15 @@
 #include <random>
 #include <cstdlib>
 #include <ctime>
+#include<fstream>
 
 // Define simulation parameters
-const int N = 16;            // Number of spins in each dimension
-const int n_steps = 10;   // Number of simulation steps
-const double T = 0.5;        // Temperature
-const double thetabox = M_PI / 4;
+
+extern size_t L;            // Number of spins in each dimension
+extern size_t N;
+extern size_t n_steps;   // Number of simulation steps
+extern double T;        // Temperature
+void mc_step(std::vector<double> & spins, double T, int &acc, double thetabox);
+double local_energy(const std::vector<double> & spins);
 
 
