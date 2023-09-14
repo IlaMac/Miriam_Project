@@ -1,7 +1,3 @@
-//
-// Created by miriam on 6/2/23.
-//
-
 #include "measures.h"
 
 // Define energy function
@@ -17,9 +13,9 @@ void energy(const std::vector<double>& spins, struct Measures &mis ) {
     mis.E= -sum_cosines;
 }
 
+// Function to calculate the total magnetization of the lattice
 
-// Function to calculate magnetization
-double magnetization(const std::vector<double>& spins) {
+double magnetization (const std::vector<double>& spins, struct Measures &mis, int N ) {
     double M_x = 0.0, M_y = 0.0;
     for (int i = 0; i < L; i++) {
         for (int j = 0; j < L; j++) {
@@ -28,6 +24,29 @@ double magnetization(const std::vector<double>& spins) {
         }
     }
     M_x /= (N);
-    M_y /= (N );
-    return M_x * M_x + M_y * M_y;
+    M_y /= (N);
+
+    mis.M = M_x * M_x + M_y * M_y;
+}
+
+
+//Function to calculate the superfluid stiffness (or better the spin stiffness)
+double helicity_modulus (const std::vector<double>& spins, struct Measures &mis, int N ){
+
+    double sum_sines = 0.0;
+
+    //calcolato solo lungo x, per ora
+
+    for (int i = 0; i < L; i++) {
+        for (int j = 0; j < L; j++) {
+            int ip =i+1;
+            if( ip==L){
+                ip =0;
+            }
+            sum_sines += sin(spins[i+j*L] - spins[ip+j*L]) ;
+            mis.Jd += cos(spins[i+j*L] - spins[ip+j*L]) ;
+        }
+    }
+    mis.Ic = sum_sines / N;
+    mis.Jd /= N;
 }
